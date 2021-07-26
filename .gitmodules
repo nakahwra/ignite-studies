@@ -1,0 +1,9 @@
+[submodule "challenges/01-to-do"]
+	path = challenges/01-to-do
+	url = https://github.com/nakahwra/to-do
+[submodule "challenges/02-watch-me"]
+	path = challenges/02-watch-me
+	url = https://github.com/nakahwra/watch-me
+[submodule "challenges/03-rocketshoes"]
+	path = challenges/03-rocketshoes
+	url = https://github.com/nakahwra/rocketshoes
