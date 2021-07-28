@@ -1,6 +1,9 @@
+import styles from '../styles/home.module.css';
 
 export default function Home() {
   return (
-    <h1>Hello ig.news!</h1>
+    <h1 className={styles.title}>
+      Hello ig.news!
+    </h1>
   )
 }
