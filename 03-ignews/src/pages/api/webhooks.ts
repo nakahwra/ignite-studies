@@ -25,8 +25,11 @@ export const config = {
   }
 }
 
+// Lista de eventos que serão processados
 const relevantEvents = new Set([
   'checkout.session.completed',
+  'customer.subscription.updated',
+  'customer.subscription.deleted',
 ]);
 
 // Tratamento dos eventos recebidos
@@ -43,22 +46,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (err) {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
-    
+
     const { type } = event;
 
     // Tratativa para cada evento relevante
     if (relevantEvents.has(type)) {
       try {
         switch (type) {
+          case 'customer.subscription.updated':
+          case 'customer.subscription.deleted':
+
+            // Tipagem
+            const subscription = event.data.object as Stripe.Subscription;
+
+            await saveSubscription(
+              subscription.id,
+              subscription.customer.toString(),
+            );
+
+            break;
           case 'checkout.session.completed':
 
             // Tipagem
             const checkoutSession = event.data.object as Stripe.Checkout.Session;
-            
-            // Chamando função da lib
+
             await saveSubscription(
               checkoutSession.subscription.toString(),
               checkoutSession.customer.toString(),
+              true
             )
 
             break;
