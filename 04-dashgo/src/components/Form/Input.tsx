@@ -23,7 +23,7 @@ const Input = ({ name, label, ...rest }: InputProps) => {
         }}
         size="lg"
         {...rest} 
-        // Habilita o componente a receber todos os props padrão do ChakraInput
+        // Habilita o componente a receber o restante de props padrão do ChakraInput
       />
     </FormControl>
   )
